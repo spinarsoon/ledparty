@@ -15,7 +15,7 @@ init_light_array();
 console.log("Artnet server is listening.");
 
 var srv = artnetsrv.listen(6454, function(msg, peer) {
-  debug_outputs(msg);
+  //debug_outputs(msg);
   for(i=0; i<msg.length; i++){
     value = msg.data[i];
     if(light_values[i] != value){
@@ -27,6 +27,9 @@ var srv = artnetsrv.listen(6454, function(msg, peer) {
 
 
 });
+function dmxToPercentValue(value){
+  return led_anti_log[value];
+}
 function init_log_array(){
   //pre-compute the anti-log array for performance
   for(i=1; i<=256; i++){
